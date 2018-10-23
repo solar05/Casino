@@ -175,12 +175,13 @@
 		<version>${spotbugs-maven-plugin.version}</version>
 		<dependencies>
 			<dependency>
-				<groupId></groupId>
-				<artifactId></artifactId>
-				<version>${spotbugs-maven-plugin-version}</version>
+				<groupId>com.github.spotbugs</groupId>
+				<artifactId>spotbugs</artifactId>
+				<version>${spotbugs-maven-plugin.version}</version>
 			</dependency>
 		</dependencies>
 	     </plugin>
+
         </plugins>
 
     </build>
