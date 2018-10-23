@@ -1,4 +1,4 @@
-!.mvn/wrapper/maven-wrapper.properties
-.mvn/*
+!/.mvn/wrapper/maven-wrapper.properties
+/.mvn/*
 pom.xml.versionsBackup
 target/
