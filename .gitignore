@@ -1,4 +1,4 @@
-target
-.mvn
-pom.xml.vesionsBackup
-
+!.mvn/wrapper/maven-wrapper.properties
+.mvn/*
+pom.xml.versionsBackup
+target/
