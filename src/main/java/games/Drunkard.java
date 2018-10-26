@@ -79,13 +79,13 @@ public class Drunkard {
 
         do {
             getTopDeck();
-            makeTurn(checkWinCondition(getPar(cardsInGame[0]),getPar(cardsInGame[1])),iterationCount);
+            makeTurn(checkWinCondition(getPar(cardsInGame[0]),getPar(cardsInGame[1])), iterationCount);
             iterationCount += 1;
         }while (getPlayerCardsCount(0) != Cards.CARDS_TOTAL_COUNT && getPlayerCardsCount(1) != Cards.CARDS_TOTAL_COUNT);
         if (getPlayerCardsCount(0) == Cards.CARDS_TOTAL_COUNT) {
-            System.out.printf("Победил первый игрок! Количество произведенных итераций: %d.%n",iterationCount);
+            System.out.printf("Победил первый игрок! Количество произведенных итераций: %d.%n", iterationCount);
         } else {
-        System.out.printf("Победил второй игрок! Количество произведенных итераций: %d.%n",iterationCount);
+        System.out.printf("Победил второй игрок! Количество произведенных итераций: %d.%n", iterationCount);
         }
     }
 }
