@@ -85,17 +85,17 @@ public class BlackJack {
             while (playersCursors[1] < 2 || (getFinalSum(0) != 0 && sum(1) < MAX_CPU_VALUE)) {
                 addCard2Player(1);
             }
-            log.info("Сумма ваших очков - {}, у копмьютера {}\n", getFinalSum(0), getFinalSum(1));
+            log.info("Сумма ваших очков - {}, у копмьютера {}", getFinalSum(0), getFinalSum(1));
             if (getFinalSum(0) > getFinalSum(1)){
-                log.info("Вы выиграли раунд! Получаете {}$\n", bet);
+                log.info("Вы выиграли раунд! Получаете {}$", bet);
                 playersMoney[0] += bet;
                 playersMoney[1] -= bet;
             } else if (getFinalSum(0) < getFinalSum(1)) {
-                log.info("Вы проиграли раунд! Теряете {}$\n", bet);
+                log.info("Вы проиграли раунд! Теряете {}$", bet);
                 playersMoney[0] -= bet;
                 playersMoney[1] += bet;
             } else {
-                log.info("Ничья! Все остались при своих деньгах.\n");
+                log.info("Ничья! Все остались при своих деньгах.");
             }
         }while (playersMoney[0] != 0 && playersMoney[1] != 0);
 

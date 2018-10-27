@@ -47,11 +47,11 @@ public class Drunkard {
     }
 
     private static void printResult(int iterator) {
-        log.info("Итерация №{} Игрок №1 карта: {}; игрок №2 карта: {}.\n", iterator, Cards.toString(cardsInGame[0]), Cards.toString(cardsInGame[1]));
+        log.info("Итерация №{} Игрок №1 карта: {}; игрок №2 карта: {}.", iterator, Cards.toString(cardsInGame[0]), Cards.toString(cardsInGame[1]));
     }
 
     private static void getRes() {
-        log.info("Всего карт: у игрока №1 - {}, у игрока №2 - {}.\n",getPlayerCardsCount(0),CARDS_TOTAL_COUNT - getPlayerCardsCount(0));
+        log.info("Всего карт: у игрока №1 - {}, у игрока №2 - {}.",getPlayerCardsCount(0),CARDS_TOTAL_COUNT - getPlayerCardsCount(0));
     }
 
     private static void makeTurn (final int result, int iter) {
@@ -90,9 +90,9 @@ public class Drunkard {
             getRes();
         }while (getPlayerCardsCount(0) != CARDS_TOTAL_COUNT && getPlayerCardsCount(1) != CARDS_TOTAL_COUNT);
         if (getPlayerCardsCount(0) == CARDS_TOTAL_COUNT) {
-            log.info("Победил первый игрок! Количество произведенных итераций: ${}\n", iterationCount);
+            log.info("Победил первый игрок! Количество произведенных итераций: ${}", iterationCount);
         } else {
-            log.info("Победил второй игрок! Количество произведенных итераций: ${}\n", iterationCount);
+            log.info("Победил второй игрок! Количество произведенных итераций: ${}", iterationCount);
         }
     }
 }
