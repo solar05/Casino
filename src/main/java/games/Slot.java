@@ -7,7 +7,7 @@ import static java.lang.Math.random;
 
 public class Slot {
 
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(Drunkard.class);
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(Slot.class);
     public static void main(String... __) {
         int initialAccount = 100;
         int betAmount = 10;
@@ -20,15 +20,15 @@ public class Slot {
             firstRoll = (firstRoll + (int) round(random() * 100)) % randNum;
             secondRoll = (secondRoll + (int) round(random() * 100)) % randNum;
             thirdRoll = (thirdRoll + (int) round(random() * 100)) % randNum;
-            System.out.format("У вас %d, ставка - %d\n", initialAccount, betAmount);
-            System.out.format("Крутим барабаны! Розыгрыш принёс следующие результаты:\n" +
-                    "первый барабан - %d, второй - %d, третий - %d\n", firstRoll, secondRoll, thirdRoll);
+            log.info("У вас {}, ставка - {}", initialAccount, betAmount);
+            log.info("Крутим барабаны! Розыгрыш принёс следующие результаты:\n" +
+                    "первый барабан - {}, второй - {}, третий - {}\n", firstRoll, secondRoll, thirdRoll);
             if ((firstRoll == secondRoll) && (secondRoll == thirdRoll)) {
                 initialAccount += winAccount;
-                System.out.format("Выигрыш %d, ваш капитал теперь составляет: %d\n", winAccount, initialAccount);
+                log.info("Выигрыш {}, ваш капитал теперь составляет: {}\n", winAccount, initialAccount);
             } else {
                 initialAccount -= betAmount;
-                System.out.format("Проигрыш %d, ваш капитал теперь составляет: %d\n", betAmount, initialAccount);
+                log.info("Проигрыш {}, ваш капитал теперь составляет: {}\n", betAmount, initialAccount);
             }
         } while (initialAccount != 0);
     }

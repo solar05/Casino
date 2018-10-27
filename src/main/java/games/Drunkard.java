@@ -45,23 +45,23 @@ public class Drunkard {
     }
 
     private static void printResult(int iterator) {
-        System.out.printf("Итерация №%d Игрок №1 карта: %s; игрок №2 карта: %s.%n", iterator, Cards.toString(cardsInGame[0]), Cards.toString(cardsInGame[1]));
-        System.out.printf("Всего карт: у игрока №1 - %d, у игрока №2 - %d%n",getPlayerCardsCount(0), getPlayerCardsCount(1));
+        log.info("Итерация №{} Игрок №1 карта: {}; игрок №2 карта: {}.\n", iterator, Cards.toString(cardsInGame[0]), Cards.toString(cardsInGame[1]));
+        log.info("Всего карт: у игрока №1 - {}, у игрока №2 - {}.\n",getPlayerCardsCount(0), getPlayerCardsCount(1));
     }
 
     private static void makeTurn (final int result, int iter) {
         printResult(iter);
         switch (result) {
             case 0:
-                System.out.println("Спор - каждый при своих!");
+                log.info("Спор - каждый при своих!");
                 putCardsBack();
                 break;
             case 1:
-                System.out.println("Выиграл игрок 1!");
+                log.info("Выиграл игрок 1!");
                 playCard(0);
                 break;
             case -1:
-                System.out.println("Выиграл игрок 2!");
+                log.info("Выиграл игрок 2!");
                 playCard(1);
                 break;
         }
@@ -84,9 +84,9 @@ public class Drunkard {
             iterationCount += 1;
         }while (getPlayerCardsCount(0) != Cards.CARDS_TOTAL_COUNT && getPlayerCardsCount(1) != Cards.CARDS_TOTAL_COUNT);
         if (getPlayerCardsCount(0) == Cards.CARDS_TOTAL_COUNT) {
-            System.out.printf("Победил первый игрок! Количество произведенных итераций: %d.%n", iterationCount);
+            log.info("Победил первый игрок! Количество произведенных итераций: ${}\n", iterationCount);
         } else {
-        System.out.printf("Победил второй игрок! Количество произведенных итераций: %d.%n", iterationCount);
+        log.info("Победил второй игрок! Количество произведенных итераций: ${}\n", iterationCount);
         }
     }
 }

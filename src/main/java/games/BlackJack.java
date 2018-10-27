@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class BlackJack {
 
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(Drunkard.class);
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(BlackJack.class);
     private static int[] cards;
     private static int cursor;
     private static int[][] playersCards;
@@ -19,7 +19,7 @@ public class BlackJack {
     private static int bet = 10;
 
     private static void initRound() {
-        System.out.printf("%nУ вас %d$ у компьютера - %d$. Начинаем новый раунд!%n", playersMoney[0], playersMoney[1]);
+        log.info("У вас {}$ у компьютера - {}$. Начинаем новый раунд!\n", playersMoney[0], playersMoney[1]);
         cards = Cards.getShuffledCards();
         playersCards = new int[2][MAX_CARDS_COUNT];
         playersCursors = new int[]{0,0};
@@ -34,9 +34,9 @@ public class BlackJack {
 
     private static void printCard (final int player, final int card) {
       if (player == 0) {
-          System.out.println("Вам выпала карта " + Cards.toString(card));
+          log.info("Вам выпала карта {}", Cards.toString(card));
       } else {
-          System.out.println("Компьютеру выпала карта " + Cards.toString(card));
+          log.info("Компьютеру выпала карта {}", Cards.toString(card));
       }
     }
 
@@ -54,7 +54,7 @@ public class BlackJack {
     }
 
     private static boolean confirm(String message) throws IOException {
-        System.out.println(message + "\"Y\" - Да, {любой другой символ} - нет (Что бы выйти из игры, нажмите Ctrl + C)");
+        log.info("{} \"Y\" - Да, {любой другой символ} - нет (Что бы выйти из игры, нажмите Ctrl + C)", message);
         switch (Choice.getCharacterFromUser()) {
             case 'Y':
             case 'y': return true;
@@ -85,25 +85,25 @@ public class BlackJack {
             while (playersCursors[1] < 2 || (getFinalSum(0) != 0 && sum(1) < MAX_CPU_VALUE)) {
                 addCard2Player(1);
             }
-            System.out.printf("Сумма ваших очков - %d, у копмьютера %d%n", getFinalSum(0), getFinalSum(1));
+            log.info("Сумма ваших очков - {}, у копмьютера {}\n", getFinalSum(0), getFinalSum(1));
             if (getFinalSum(0) > getFinalSum(1)){
-                System.out.printf("Вы выиграли раунд! Получаете %d$%n", bet);
+                log.info("Вы выиграли раунд! Получаете {}$\n", bet);
                 playersMoney[0] += bet;
                 playersMoney[1] -= bet;
             } else if (getFinalSum(0) < getFinalSum(1)) {
-                System.out.printf("Вы проиграли раунд! Теряете %d$%n", bet);
+                log.info("Вы проиграли раунд! Теряете {}$\n", bet);
                 playersMoney[0] -= bet;
                 playersMoney[1] += bet;
             } else {
-                System.out.println("Ничья! Все остались при своих деньгах.%n");
+                log.info("Ничья! Все остались при своих деньгах.\n");
             }
         }while (playersMoney[0] != 0 && playersMoney[1] != 0);
 
 
         if (playersMoney[0] > 0){
-            System.out.println("Вы выиграли! Поздравляем!");
+            log.info("Вы выиграли! Поздравляем!");
         } else {
-            System.out.println("Вы проиграли. Соболезнуем...");
+            log.info("Вы проиграли. Соболезнуем...");
         }
     }
 }

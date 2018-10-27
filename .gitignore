@@ -2,4 +2,5 @@
 /.mvn/*
 pom.xml.versionsBackup
 target/
+logs/
 
