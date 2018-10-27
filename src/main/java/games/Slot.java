@@ -1,10 +1,13 @@
 package games;
 
+import org.slf4j.Logger;
+
 import static java.lang.Math.round;
 import static java.lang.Math.random;
 
 public class Slot {
 
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(Drunkard.class);
     public static void main(String... __) {
         int initialAccount = 100;
         int betAmount = 10;

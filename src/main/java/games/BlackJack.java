@@ -1,9 +1,12 @@
 package games;
 
+import org.slf4j.Logger;
+
 import java.io.IOException;
 
 public class BlackJack {
 
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(Drunkard.class);
     private static int[] cards;
     private static int cursor;
     private static int[][] playersCards;

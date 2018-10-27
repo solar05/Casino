@@ -1,9 +1,11 @@
 package games;
 
 import static  games.Cards.*;
+import  org.slf4j.Logger;
 
 public class Drunkard {
 
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(Drunkard.class);
     private static int[] deck = Cards.getShuffledCards();
     private static int[][] playersCards = new int[2][Cards.CARDS_TOTAL_COUNT];
     private  static int[] cardsInGame = new int[2];
@@ -44,6 +46,7 @@ public class Drunkard {
 
     private static void printResult(int iterator) {
         System.out.printf("Итерация №%d Игрок №1 карта: %s; игрок №2 карта: %s.%n", iterator, Cards.toString(cardsInGame[0]), Cards.toString(cardsInGame[1]));
+        System.out.printf("Всего карт: у игрока №1 - %d, у игрока №2 - %d%n",getPlayerCardsCount(0), getPlayerCardsCount(1));
     }
 
     private static void makeTurn (final int result, int iter) {
@@ -66,10 +69,8 @@ public class Drunkard {
 
 
     private static int getPlayerCardsCount(final int playerNumber) {
-        if (beginCardsPointer[playerNumber] <= endCardsPointer[playerNumber]) {
-            return endCardsPointer[playerNumber] - beginCardsPointer[playerNumber] + 1;
-        }
-        return endCardsPointer[playerNumber] + Cards.CARDS_TOTAL_COUNT - beginCardsPointer[playerNumber] + 1;
+        return beginCardsPointer[playerNumber] <= endCardsPointer[playerNumber] ? endCardsPointer[playerNumber] - beginCardsPointer[playerNumber] + 1 :
+                endCardsPointer[playerNumber] + Cards.CARDS_TOTAL_COUNT - beginCardsPointer[playerNumber] + 1;
     }
 
 
