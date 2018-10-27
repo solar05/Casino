@@ -6,7 +6,6 @@ import  org.slf4j.Logger;
 public class Drunkard {
 
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(Drunkard.class);
-    private static int[] deck = Cards.getShuffledCards();
     private static int[][] playersCards = new int[2][Cards.CARDS_TOTAL_COUNT];
     private  static int[] cardsInGame = new int[2];
     private static int endCardNumber = Cards.CARDS_TOTAL_COUNT / 2;
@@ -14,8 +13,11 @@ public class Drunkard {
     private static int[] endCardsPointer = {endCardNumber,endCardNumber - 1};
 
     private static void startGame() {
-        System.arraycopy(deck, 0 ,playersCards[0], 0, endCardNumber);
-        System.arraycopy(deck, endCardNumber, playersCards[1], 0, endCardNumber);
+        int[] cardsFull = getShuffledCards();
+        for (int i = 0; i <= CARDS_TOTAL_COUNT /2 - 1; i++) {
+            playersCards[0][i] = cardsFull[i];
+            playersCards[1][i] = cardsFull[i + 18];
+        }
     }
 
     private static int checkWinCondition(final Par firstCard, final Par secondCard) {
@@ -31,10 +33,10 @@ public class Drunkard {
     }
 
     private static void playCard(final int playerNumber) {
-        endCardsPointer[playerNumber] = (endCardsPointer[playerNumber] + 1) % Cards.CARDS_TOTAL_COUNT;
+        endCardsPointer[playerNumber] = (endCardsPointer[playerNumber] + 1) % CARDS_TOTAL_COUNT;
         playersCards[playerNumber][endCardsPointer[playerNumber]] = cardsInGame[0];
-        playersCards[playerNumber][endCardsPointer[playerNumber]] = cardsInGame[1];
-    }
+        endCardsPointer[playerNumber] = (endCardsPointer[playerNumber] + 1) % CARDS_TOTAL_COUNT;
+        playersCards[playerNumber][endCardsPointer[playerNumber]] = cardsInGame[1];}
 
     private static  void putCardsBack() {
         endCardsPointer[0] = (endCardsPointer[0] + 1) % Cards.CARDS_TOTAL_COUNT;
@@ -46,7 +48,10 @@ public class Drunkard {
 
     private static void printResult(int iterator) {
         log.info("Итерация №{} Игрок №1 карта: {}; игрок №2 карта: {}.\n", iterator, Cards.toString(cardsInGame[0]), Cards.toString(cardsInGame[1]));
-        log.info("Всего карт: у игрока №1 - {}, у игрока №2 - {}.\n",getPlayerCardsCount(0), getPlayerCardsCount(1));
+    }
+
+    private static void getRes() {
+        log.info("Всего карт: у игрока №1 - {}, у игрока №2 - {}.\n",getPlayerCardsCount(0),CARDS_TOTAL_COUNT - getPlayerCardsCount(0));
     }
 
     private static void makeTurn (final int result, int iter) {
@@ -82,11 +87,12 @@ public class Drunkard {
             getTopDeck();
             makeTurn(checkWinCondition(getPar(cardsInGame[0]),getPar(cardsInGame[1])), iterationCount);
             iterationCount += 1;
-        }while (getPlayerCardsCount(0) != Cards.CARDS_TOTAL_COUNT && getPlayerCardsCount(1) != Cards.CARDS_TOTAL_COUNT);
-        if (getPlayerCardsCount(0) == Cards.CARDS_TOTAL_COUNT) {
+            getRes();
+        }while (getPlayerCardsCount(0) != CARDS_TOTAL_COUNT && getPlayerCardsCount(1) != CARDS_TOTAL_COUNT);
+        if (getPlayerCardsCount(0) == CARDS_TOTAL_COUNT) {
             log.info("Победил первый игрок! Количество произведенных итераций: ${}\n", iterationCount);
         } else {
-        log.info("Победил второй игрок! Количество произведенных итераций: ${}\n", iterationCount);
+            log.info("Победил второй игрок! Количество произведенных итераций: ${}\n", iterationCount);
         }
     }
 }
