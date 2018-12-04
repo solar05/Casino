@@ -85,7 +85,7 @@ public class BlackJack {
             while (playersCursors[1] < 2 || (getFinalSum(0) != 0 && sum(1) < MAX_CPU_VALUE)) {
                 addCard2Player(1);
             }
-            log.info("Сумма ваших очков - {}, у копмьютера {}", getFinalSum(0), getFinalSum(1));
+            log.info("Сумма ваших очков - {}, у компьютера {}", getFinalSum(0), getFinalSum(1));
             if (getFinalSum(0) > getFinalSum(1)){
                 log.info("Вы выиграли раунд! Получаете {}$", bet);
                 playersMoney[0] += bet;
